@@ -1,0 +1,63 @@
+{
+  "name": "location-register",
+  "version": "1.0.0",
+  "description": "sISTEMA ",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format": "prettier --write \"**/*.{js,ts,json,md}\"",
+    "format:check": "prettier --check \"**/*.{js,ts,json,md}\"",
+    "prepare": "husky",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "check:node": "node -e \"const v=process.versions.node.split('.')[0]; if(v < 22) { console.error('Node.js 22+ é necessário'); process.exit(1); }\"",
+    "preinstall": "npm run check:node",
+    "dev": "nodemon -L src --ext ts --exec \"ts-node -r tsconfig-paths/register src/index.ts\"",
+    "build": "tsc && tsc-alias"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matheusfurlan7/location-register.git"
+  },
+  "author": "Matheus Furlan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matheusfurlan7/location-register/issues"
+  },
+  "homepage": "https://github.com/matheusfurlan7/location-register#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.37.0",
+    "@eslint/json": "^0.13.2",
+    "@types/node": "^24.7.1",
+    "@vitest/coverage-v8": "^3.2.4",
+    "eslint": "^9.37.0",
+    "globals": "^16.4.0",
+    "husky": "^9.1.7",
+    "jiti": "^2.6.1",
+    "lint-staged": "^16.2.3",
+    "nodemon": "^3.1.10",
+    "prettier": "3.6.2",
+    "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.16",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.0",
+    "vitest": "^3.2.4"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,md}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{ts,tsx}": [
+      "vitest related --run",
+      "npx tsc --noEmit"
+    ]
+  },
+  "engines": {
+    "node": ">=22.0.0 <23.0.0"
+  },
+  "engineStrict": true
+}

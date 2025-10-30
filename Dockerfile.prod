@@ -1,0 +1,24 @@
+# Etapa 1: build
+FROM node:22-alpine AS builder
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# Etapa 2: runtime (leve)
+FROM alpine:3.20 AS runner
+
+# Adiciona apenas o Node.js runtime, sem npm
+RUN apk add --no-cache nodejs
+
+WORKDIR /app
+
+# Copia apenas o build e node_modules (de produção)
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+COPY package*.json ./
+
+EXPOSE 3000
+CMD ["node", "dist/index.js"]
