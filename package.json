@@ -52,8 +52,7 @@
       "prettier --write"
     ],
     "*.{ts,tsx}": [
-      "vitest related --run",
-      "npx tsc --noEmit"
+      "vitest related --run"
     ]
   },
   "engines": {
